@@ -117,6 +117,5 @@ let currentEditIndex = 0;
 
 newBookBtn.addEventListener("click", openAddModal);
 closeModalElements.forEach(element => element.addEventListener("click", closeModals));
-window.addEventListener("click", e => e.target === modalsContainer ? closeModals() : "");
 addForm.addEventListener("submit", e => handleAddSubmit(e));
 editForm.addEventListener("submit", e => handleEditSubmit(e));
