@@ -8,7 +8,7 @@ This project consists of a simple library app.
 
 - Assignment by [The Odin Project](https://www.theodinproject.com/) as a part of the [Full Stack JavaScript Course](https://www.theodinproject.com/paths/full-stack-javascript).
 
-- Custom fonts and icons by [Google Fonts](https://fonts.google.com/).
+- Custom font by [Google Fonts](https://fonts.google.com/).
 
 ## Outcome
 
