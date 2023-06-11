@@ -5,26 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
 </head>
 <body>
-  <button class="newBookBtn">New Book</button>
+  <header>
+    <h1>Library App</h1>
+    <button class="newBookBtn">New Book</button>
+  </header>
 
   <div class="modals-container">
     <div class="add-modal">
       <div class="modal-header">
-        <h1>Add new book</h1>
+        <h2>Add new book</h2>
         <span class="close">×</span>
       </div>
       <form id="add-form" class="form">
         <div class="input-container">
           <label for="title">Title</label>
-          <input type="text" id="title" required>
+          <input type="text" id="title" maxlength="50" required>
         </div>
         <div class="input-container">
           <label for="author">Author</label>
-          <input type="text" id="author" required>
+          <input type="text" id="author" maxlength="30" required>
         </div>
         <div class="input-container">
           <label for="pages">Pages</label>
@@ -43,7 +49,7 @@
 
     <div class="edit-modal">
       <div class="modal-header">
-        <h1>Edit book</h1>
+        <h2>Edit book</h2>
         <span class="close">×</span>
       </div>
       <form id="edit-form" class="form">
@@ -70,19 +76,20 @@
       </div>
     </div>
   </div>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th class="pages">Pages</th>
-        <th>Status</th>
-        <th colspan="2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th class="pages">Pages</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>

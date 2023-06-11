@@ -39,8 +39,7 @@ function createBookElement(book) {
   const pages = document.createElement("td");
   pages.classList.add("pages");
   const isRead = document.createElement("td");
-  const editTd = document.createElement("td");
-  const deleteTd = document.createElement("td");
+  const actionsTd = document.createElement("td");
   const editBtn = document.createElement("button");
   const deleteBtn = document.createElement("button");
   editBtn.innerHTML = "Edit";
@@ -53,14 +52,13 @@ function createBookElement(book) {
   author.innerHTML = book.author;
   pages.innerHTML = book.pages;
   isRead.innerHTML = book.isRead ? "Read" : "Not Read";
-  editTd.appendChild(editBtn);
-  deleteTd.appendChild(deleteBtn);
+  actionsTd.appendChild(editBtn);
+  actionsTd.appendChild(deleteBtn);
   tr.appendChild(title);
   tr.appendChild(author);
   tr.appendChild(pages);
   tr.appendChild(isRead);
-  tr.appendChild(editTd);
-  tr.appendChild(deleteTd);
+  tr.appendChild(actionsTd);
   table.appendChild(tr);
 }
 
