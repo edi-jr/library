@@ -1,25 +1,27 @@
-let myLibrary = [];
+const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
 }
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-function editBook(e) {
+function editBook() {
   myLibrary[currentEditIndex].title = editForm.querySelector("#title").value;
   myLibrary[currentEditIndex].author = editForm.querySelector("#author").value;
   myLibrary[currentEditIndex].pages = editForm.querySelector("#pages").value;
   myLibrary[currentEditIndex].isRead = editForm.querySelector("#isRead").checked;
 }
 
-function removeBookFromLibrary(e) {
-  myLibrary.splice(e.target.dataset.index, 1);
+function removeBookFromLibrary(element) {
+  myLibrary.splice(element.dataset.index, 1);
   displayBooks();
 }
 
@@ -33,44 +35,29 @@ function getBook() {
 
 function createBookElement(book) {
   book.index = myLibrary.indexOf(book);
-  const tr = document.createElement("tr");
-  const title = document.createElement("td");
-  const author = document.createElement("td");
-  const pages = document.createElement("td");
-  pages.classList.add("pages");
-  const isRead = document.createElement("td");
-  const actionsTd = document.createElement("td");
-  const editBtn = document.createElement("button");
-  const deleteBtn = document.createElement("button");
-  editBtn.innerHTML = "Edit";
-  editBtn.dataset.index = book.index;
-  editBtn.addEventListener("click", e => openEditModal(e));
-  deleteBtn.innerHTML = "Delete";
-  deleteBtn.dataset.index = book.index;
-  deleteBtn.addEventListener("click", e => removeBookFromLibrary(e));
-  title.innerHTML = book.title;
-  author.innerHTML = book.author;
-  pages.innerHTML = book.pages;
-  isRead.innerHTML = book.isRead ? "Read" : "Not Read";
-  actionsTd.appendChild(editBtn);
-  actionsTd.appendChild(deleteBtn);
-  tr.appendChild(title);
-  tr.appendChild(author);
-  tr.appendChild(pages);
-  tr.appendChild(isRead);
-  tr.appendChild(actionsTd);
-  table.appendChild(tr);
+  tBody.innerHTML += `
+    <tr>
+      <td>${book.title}</td>
+      <td>${book.author}</td>
+      <td class="pages">${book.pages}</td>
+      <td>${book.isRead ? "Read" : "Not Read"}</td>
+      <td>
+        <button data-index="${book.index}" onclick="openEditModal(this)">Edit</button>
+        <button data-index="${book.index}" onclick="removeBookFromLibrary(this)">Delete</button>
+      </td>
+    </tr>
+  `;
 }
 
 function displayBooks() {
-  table.innerHTML = "";
+  tBody.innerHTML = "";
   myLibrary.forEach(book => createBookElement(book));
 }
 
-function openEditModal(e) {
+function openEditModal(element) {
   modalsContainer.style.display = "block";
   editModal.style.display = "block";
-  currentEditIndex = e.target.dataset.index;
+  currentEditIndex = element.dataset.index;
   editForm.querySelector("#title").value = myLibrary[currentEditIndex].title;
   editForm.querySelector("#author").value = myLibrary[currentEditIndex].author;
   editForm.querySelector("#pages").value = myLibrary[currentEditIndex].pages;
@@ -104,7 +91,7 @@ function handleEditSubmit(e) {
   displayBooks();
 }
 
-const table = document.querySelector("tbody");
+const tBody = document.querySelector("tbody");
 const newBookBtn = document.querySelector(".newBookBtn");
 const modalsContainer = document.querySelector(".modals-container");
 const addModal = document.querySelector(".add-modal");
@@ -113,7 +100,7 @@ const editModal = document.querySelector(".edit-modal");
 const editForm = document.querySelector("#edit-form");
 const closeModalElements = document.querySelectorAll(".close");
 const forms = document.querySelectorAll(".form");
-let currentEditIndex = 0;
+let currentEditIndex;
 
 newBookBtn.addEventListener("click", openAddModal);
 closeModalElements.forEach(element => element.addEventListener("click", closeModals));
