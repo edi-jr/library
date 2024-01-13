@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 class Book {
   constructor(title, author, pages, isRead) {
@@ -6,6 +6,16 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
+  }
+}
+
+function saveLocal() {
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
+function loadLocal() {
+  if(localStorage.getItem("library")) {
+    myLibrary = JSON.parse(localStorage.getItem("library"));
   }
 }
 
@@ -22,6 +32,7 @@ function editBook() {
 
 function removeBookFromLibrary(element) {
   myLibrary.splice(element.dataset.index, 1);
+  saveLocal();
   displayBooks();
 }
 
@@ -81,6 +92,7 @@ function handleAddSubmit(e) {
   const book = getBook();
   addBookToLibrary(book);
   closeModals();
+  saveLocal();
   displayBooks();
 }
 
@@ -88,6 +100,7 @@ function handleEditSubmit(e) {
   e.preventDefault();
   editBook();
   closeModals();
+  saveLocal();
   displayBooks();
 }
 
@@ -106,3 +119,8 @@ newBookBtn.addEventListener("click", openAddModal);
 closeModalElements.forEach(element => element.addEventListener("click", closeModals));
 addForm.addEventListener("submit", e => handleAddSubmit(e));
 editForm.addEventListener("submit", e => handleEditSubmit(e));
+
+window.onload = () => {
+  loadLocal();
+  displayBooks();
+}
