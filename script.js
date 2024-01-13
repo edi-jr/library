@@ -119,8 +119,5 @@ newBookBtn.addEventListener("click", openAddModal);
 closeModalElements.forEach(element => element.addEventListener("click", closeModals));
 addForm.addEventListener("submit", e => handleAddSubmit(e));
 editForm.addEventListener("submit", e => handleEditSubmit(e));
-
-window.onload = () => {
-  loadLocal();
-  displayBooks();
-}
+loadLocal();
+displayBooks();
